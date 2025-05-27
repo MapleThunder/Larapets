@@ -18,9 +18,10 @@ composer install
 npm install && npm run build
 ```
 
-Generate an app key
+Copy the `.env.example` to create an `.env` file and generate an app key.
 
 ```sh
+cp .env.example .env
 php artisan key:generate
 ```
 

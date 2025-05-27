@@ -26,21 +26,21 @@ const submit = () => {
     <AuthBase title="Create an account" description="Enter your details below to create your account">
         <Head title="Register" />
 
-        <form @submit.prevent="submit" class="flex flex-col gap-6">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
+        <form @submit.prevent="submit" class="register-form">
+            <div class="form-fields">
+                <div class="form-field">
                     <Label for="name">Name</Label>
                     <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" v-model="form.name" placeholder="Full name" />
                     <InputError :message="form.errors.name" />
                 </div>
 
-                <div class="grid gap-2">
+                <div class="form-field">
                     <Label for="email">Email address</Label>
                     <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email" placeholder="email@example.com" />
                     <InputError :message="form.errors.email" />
                 </div>
 
-                <div class="grid gap-2">
+                <div class="form-field">
                     <Label for="password">Password</Label>
                     <Input
                         id="password"
@@ -54,7 +54,7 @@ const submit = () => {
                     <InputError :message="form.errors.password" />
                 </div>
 
-                <div class="grid gap-2">
+                <div class="form-field">
                     <Label for="password_confirmation">Confirm password</Label>
                     <Input
                         id="password_confirmation"
@@ -68,16 +68,67 @@ const submit = () => {
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
 
-                <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                <Button type="submit" class="submit-button" tabindex="5" :disabled="form.processing">
+                    <LoaderCircle v-if="form.processing" class="spinner" />
                     Create account
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div class="form-footer">
                 Already have an account?
-                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                <TextLink :href="route('login')" class="login-link" :tabindex="6">Log in</TextLink>
             </div>
         </form>
     </AuthBase>
 </template>
+
+<style scoped>
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-fields {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.submit-button {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--muted-foreground, #6b7280);
+}
+
+.login-link {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-left: 0.25rem;
+}
+</style>

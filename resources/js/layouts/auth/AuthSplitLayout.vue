@@ -13,28 +13,147 @@ defineProps<{
 </script>
 
 <template>
-    <div class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-            <div class="absolute inset-0 bg-zinc-900" />
-            <Link :href="route('home')" class="relative z-20 flex items-center text-lg font-medium">
-                <AppLogoIcon class="mr-2 size-8 fill-current text-white" />
+    <div class="auth-layout">
+        <div class="auth-sidebar">
+            <div class="sidebar-background" />
+            <Link :href="route('home')" class="logo-link">
+                <AppLogoIcon class="logo-icon" />
                 {{ name }}
             </Link>
-            <div v-if="quote" class="relative z-20 mt-auto">
-                <blockquote class="space-y-2">
-                    <p class="text-lg">&ldquo;{{ quote.message }}&rdquo;</p>
-                    <footer class="text-sm text-neutral-300">{{ quote.author }}</footer>
+            <div v-if="quote" class="quote-wrapper">
+                <blockquote class="quote">
+                    <p class="quote-message">&ldquo;{{ quote.message }}&rdquo;</p>
+                    <footer class="quote-author">{{ quote.author }}</footer>
                 </blockquote>
             </div>
         </div>
-        <div class="lg:p-8">
-            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-                <div class="flex flex-col space-y-2 text-center">
-                    <h1 class="text-xl font-medium tracking-tight" v-if="title">{{ title }}</h1>
-                    <p class="text-sm text-muted-foreground" v-if="description">{{ description }}</p>
+
+        <div class="auth-main">
+            <div class="auth-form-wrapper">
+                <div class="form-header">
+                    <h1 v-if="title" class="form-title">{{ title }}</h1>
+                    <p v-if="description" class="form-description">{{ description }}</p>
                 </div>
                 <slot />
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100dvh;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .auth-layout {
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+    }
+}
+
+.auth-sidebar {
+    display: none;
+    flex-direction: column;
+    background-color: var(--muted-bg, #1f2937);
+    padding: 2.5rem;
+    color: white;
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    .auth-sidebar {
+        display: flex;
+        height: 100%;
+        border-right: 1px solid var(--border-color, #2d2d2d);
+    }
+}
+
+.sidebar-background {
+    position: absolute;
+    inset: 0;
+    background-color: #18181b;
+    z-index: 0;
+}
+
+.logo-link {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+.logo-icon {
+    margin-right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    fill: currentColor;
+}
+
+.quote-wrapper {
+    margin-top: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.quote {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quote-message {
+    font-size: 1.125rem;
+}
+
+.quote-author {
+    font-size: 0.875rem;
+    color: #d4d4d8;
+}
+
+.auth-main {
+    padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .auth-main {
+        padding: 2rem;
+    }
+}
+
+.auth-form-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.form-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.form-description {
+    font-size: 0.875rem;
+    color: var(--muted-foreground, #6b7280);
+}
+</style>

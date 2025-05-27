@@ -31,13 +31,13 @@ const submit = () => {
     <AuthBase title="Log in to your account" description="Enter your email and password below to log in">
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
+        <div v-if="status" class="status-message">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit" class="flex flex-col gap-6">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
+        <form @submit.prevent="submit" class="login-form">
+            <div class="form-fields">
+                <div class="form-field">
                     <Label for="email">Email address</Label>
                     <Input
                         id="email"
@@ -52,10 +52,10 @@ const submit = () => {
                     <InputError :message="form.errors.email" />
                 </div>
 
-                <div class="grid gap-2">
-                    <div class="flex items-center justify-between">
+                <div class="form-field">
+                    <div class="field-label">
                         <Label for="password">Password</Label>
-                        <TextLink v-if="canResetPassword" :href="route('password.request')" class="text-sm" :tabindex="5">
+                        <TextLink v-if="canResetPassword" :href="route('password.request')" class="forgot-link" :tabindex="5">
                             Forgot password?
                         </TextLink>
                     </div>
@@ -71,23 +71,102 @@ const submit = () => {
                     <InputError :message="form.errors.password" />
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
+                <div class="remember-me">
+                    <Label for="remember" class="remember-label">
                         <Checkbox id="remember" v-model="form.remember" :tabindex="3" />
                         <span>Remember me</span>
                     </Label>
                 </div>
 
-                <Button type="submit" class="mt-4 w-full" :tabindex="4" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                <Button type="submit" class="submit-button" :tabindex="4" :disabled="form.processing">
+                    <LoaderCircle v-if="form.processing" class="spinner" />
                     Log in
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div class="form-footer">
                 Don't have an account?
                 <TextLink :href="route('register')" :tabindex="5">Sign up</TextLink>
             </div>
         </form>
     </AuthBase>
 </template>
+
+<style scoped>
+.status-message {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #16a34a;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-fields {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.field-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-link {
+    font-size: 0.875rem;
+}
+
+.remember-me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.submit-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--muted-foreground, #6b7280);
+}
+
+.form-footer span {
+    margin-right: 0.25rem;
+}
+</style>

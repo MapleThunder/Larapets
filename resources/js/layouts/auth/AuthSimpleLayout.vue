@@ -9,19 +9,19 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-        <div class="w-full max-w-sm">
-            <div class="flex flex-col gap-8">
-                <div class="flex flex-col items-center gap-4">
-                    <Link :href="route('home')" class="flex flex-col items-center gap-2 font-medium">
-                        <div class="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                            <AppLogoIcon class="size-9 fill-current text-[var(--foreground)] dark:text-white" />
+    <div class="auth-card-layout">
+        <div class="card-wrapper">
+            <div class="card-content">
+                <div class="card-header">
+                    <Link :href="route('home')" class="logo-link">
+                        <div class="logo-container">
+                            <AppLogoIcon class="logo-icon" />
                         </div>
                         <span class="sr-only">{{ title }}</span>
                     </Link>
-                    <div class="space-y-2 text-center">
-                        <h1 class="text-xl font-medium">{{ title }}</h1>
-                        <p class="text-center text-sm text-muted-foreground">{{ description }}</p>
+                    <div class="text-center">
+                        <h1 class="card-title">{{ title }}</h1>
+                        <p class="card-description">{{ description }}</p>
                     </div>
                 </div>
                 <slot />
@@ -29,3 +29,75 @@ defineProps<{
         </div>
     </div>
 </template>
+
+<style scoped>
+.auth-card-layout {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: var(--background, #fff);
+    padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .auth-card-layout {
+        padding: 2.5rem;
+    }
+}
+
+.card-wrapper {
+    width: 100%;
+    max-width: 24rem; /* max-w-sm */
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 0.375rem;
+}
+
+.logo-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    fill: currentColor;
+    color: var(--foreground, #000);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.card-description {
+    font-size: 0.875rem;
+    color: var(--muted-foreground, #6b7280);
+}
+</style>

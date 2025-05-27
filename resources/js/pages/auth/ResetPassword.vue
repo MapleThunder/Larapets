@@ -34,15 +34,15 @@ const submit = () => {
     <AuthLayout title="Reset password" description="Please enter your new password below">
         <Head title="Reset password" />
 
-        <form @submit.prevent="submit">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
+        <form @submit.prevent="submit" class="reset-form">
+            <div class="form-fields">
+                <div class="form-field">
                     <Label for="email">Email</Label>
-                    <Input id="email" type="email" name="email" autocomplete="email" v-model="form.email" class="mt-1 block w-full" readonly />
-                    <InputError :message="form.errors.email" class="mt-2" />
+                    <Input id="email" type="email" name="email" autocomplete="email" v-model="form.email" readonly class="input" />
+                    <InputError :message="form.errors.email" class="input-error" />
                 </div>
 
-                <div class="grid gap-2">
+                <div class="form-field">
                     <Label for="password">Password</Label>
                     <Input
                         id="password"
@@ -50,32 +50,79 @@ const submit = () => {
                         name="password"
                         autocomplete="new-password"
                         v-model="form.password"
-                        class="mt-1 block w-full"
                         autofocus
                         placeholder="Password"
+                        class="input"
                     />
                     <InputError :message="form.errors.password" />
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="password_confirmation"> Confirm Password </Label>
+                <div class="form-field">
+                    <Label for="password_confirmation">Confirm Password</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
                         autocomplete="new-password"
                         v-model="form.password_confirmation"
-                        class="mt-1 block w-full"
                         placeholder="Confirm password"
+                        class="input"
                     />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
 
-                <Button type="submit" class="mt-4 w-full" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                <Button type="submit" class="submit-button" :disabled="form.processing">
+                    <LoaderCircle v-if="form.processing" class="spinner" />
                     Reset password
                 </Button>
             </div>
         </form>
     </AuthLayout>
 </template>
+
+<style scoped>
+.reset-form {
+    width: 100%;
+}
+
+.form-fields {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.input {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+}
+
+.input-error {
+    margin-top: 0.5rem;
+}
+
+.submit-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>

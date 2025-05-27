@@ -21,10 +21,18 @@ const breadcrumbItems: BreadcrumbItem[] = [
         <Head title="Appearance settings" />
 
         <SettingsLayout>
-            <div class="space-y-6">
+            <div class="appearance-container">
                 <HeadingSmall title="Appearance settings" description="Update your account's appearance settings" />
                 <AppearanceTabs />
             </div>
         </SettingsLayout>
     </AppLayout>
 </template>
+
+<style scoped>
+.appearance-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+</style>

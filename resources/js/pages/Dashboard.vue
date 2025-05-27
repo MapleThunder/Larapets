@@ -16,21 +16,67 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+        <div class="dashboard-container">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
                     <PlaceholderPattern />
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="dashboard-card">
                     <PlaceholderPattern />
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <div class="dashboard-card">
                     <PlaceholderPattern />
                 </div>
             </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min">
+            <div class="dashboard-full">
                 <PlaceholderPattern />
             </div>
         </div>
     </AppLayout>
 </template>
+
+<style scoped>
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: min-content;
+}
+
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.dashboard-card {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid var(--sidebar-border, #ccc);
+}
+
+.dashboard-full {
+    position: relative;
+    flex: 1;
+    min-height: 100vh;
+    border-radius: 0.75rem;
+    border: 1px solid var(--sidebar-border, #ccc);
+}
+
+@media (min-width: 768px) {
+    .dashboard-full {
+        min-height: auto;
+    }
+}
+</style>

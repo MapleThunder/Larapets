@@ -7,120 +7,78 @@ import { Head, Link } from '@inertiajs/vue3';
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
-    <div class="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] dark:bg-[#0a0a0a] lg:justify-center lg:p-8">
-        <header class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] text-sm lg:max-w-4xl">
-            <nav class="flex items-center justify-end gap-4">
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('dashboard')"
-                    class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                    class="nav-link auth"
                 >
                     Dashboard
                 </Link>
                 <template v-else>
                     <Link
                         :href="route('login')"
-                        class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                        class="nav-link"
                     >
                         Log in
                     </Link>
                     <Link
                         :href="route('register')"
-                        class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                        class="nav-link auth"
                     >
                         Register
                     </Link>
                 </template>
             </nav>
         </header>
-        <div class="duration-750 starting:opacity-0 flex w-full items-center justify-center opacity-100 transition-opacity lg:grow">
-            <main class="flex w-full max-w-[335px] flex-col-reverse overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row">
-                <div
-                    class="flex-1 rounded-bl-lg rounded-br-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] lg:rounded-br-none lg:rounded-tl-lg lg:p-20"
-                >
-                    <h1 class="mb-1 font-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
+        <div class="content-wrapper">
+            <main class="main">
+                <div class="info-panel">
+                    <h1>Let's get started</h1>
+                    <p class="intro">
                         Laravel has an incredibly rich ecosystem. <br />We suggest starting with the following.
                     </p>
-                    <ul class="mb-4 flex flex-col lg:mb-6">
-                        <li
-                            class="relative flex items-center gap-4 py-2 before:absolute before:bottom-0 before:left-[0.4rem] before:top-1/2 before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
-                        >
-                            <span class="relative bg-white py-1 dark:bg-[#161615]">
-                                <span
-                                    class="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[#e3e3e0] bg-[#FDFDFC] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] dark:border-[#3E3E3A] dark:bg-[#161615]"
-                                >
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A]" />
-                                </span>
+                    <ul class="steps">
+                        <li class="step">
+                            <span class="step-icon">
+                                <span class="inner-dot"></span>
                             </span>
                             <span>
                                 Read the
-                                <a
-                                    href="https://laravel.com/docs"
-                                    target="_blank"
-                                    class="ml-1 inline-flex items-center space-x-1 font-medium text-[#f53003] underline underline-offset-4 dark:text-[#FF4433]"
-                                >
+                                <a href="https://laravel.com/docs" target="_blank" class="link">
                                     <span>Documentation</span>
-                                    <svg
-                                        width="{10}"
-                                        height="{11}"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-2.5 w-2.5"
-                                    >
+                                    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001" stroke="currentColor" stroke-linecap="square" />
                                     </svg>
                                 </a>
                             </span>
                         </li>
-                        <li
-                            class="relative flex items-center gap-4 py-2 before:absolute before:bottom-1/2 before:left-[0.4rem] before:top-0 before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
-                        >
-                            <span class="relative bg-white py-1 dark:bg-[#161615]">
-                                <span
-                                    class="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[#e3e3e0] bg-[#FDFDFC] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] dark:border-[#3E3E3A] dark:bg-[#161615]"
-                                >
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A]" />
-                                </span>
+                        <li class="step">
+                            <span class="step-icon">
+                                <span class="inner-dot"></span>
                             </span>
                             <span>
                                 Watch video tutorials at
-                                <a
-                                    href="https://laracasts.com"
-                                    target="_blank"
-                                    class="ml-1 inline-flex items-center space-x-1 font-medium text-[#f53003] underline underline-offset-4 dark:text-[#FF4433]"
-                                >
+                                <a href="https://laracasts.com" target="_blank" class="link">
                                     <span>Laracasts</span>
-                                    <svg
-                                        width="{10}"
-                                        height="{11}"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-2.5 w-2.5"
-                                    >
+                                    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001" stroke="currentColor" stroke-linecap="square" />
                                     </svg>
                                 </a>
                             </span>
                         </li>
                     </ul>
-                    <ul class="flex gap-3 text-sm leading-normal">
+                    <ul class="cta">
                         <li>
-                            <a
-                                href="https://cloud.laravel.com"
-                                target="_blank"
-                                class="inline-block rounded-sm border border-black bg-[#1b1b18] px-5 py-1.5 text-sm leading-normal text-white hover:border-black hover:bg-black dark:border-[#eeeeec] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:border-white dark:hover:bg-white"
-                            >
+                            <a href="https://cloud.laravel.com" target="_blank" class="cta-button">
                                 Deploy now
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div
-                    class="relative -mb-px aspect-335/376 w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] dark:bg-[#1D0002] lg:-ml-px lg:mb-0 lg:aspect-auto lg:w-[438px] lg:rounded-r-lg lg:rounded-t-none"
-                >
+                <div class="image-panel">
                     <svg
                         class="duration-750 starting:translate-y-6 starting:opacity-0 w-full max-w-none translate-y-0 text-[#F53003] opacity-100 transition-all dark:text-[#F61500]"
                         viewBox="0 0 438 104"
@@ -776,12 +734,221 @@ import { Head, Link } from '@inertiajs/vue3';
                             />
                         </g>
                     </svg>
-                    <div
-                        class="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] lg:overflow-hidden lg:rounded-r-lg lg:rounded-t-none"
-                    />
+                    <div class="image-overlay"></div>
                 </div>
             </main>
         </div>
-        <div class="h-14.5 hidden lg:block"></div>
+        <div class="spacer"></div>
     </div>
 </template>
+
+<style scoped>
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FDFDFC;
+    color: #1b1b18;
+    padding: 1.5rem;
+}
+
+.header {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 335px;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 1024px) {
+    .header {
+        max-width: 64rem;
+    }
+    .container {
+        justify-content: center;
+        padding: 2rem;
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 0.375rem 1.25rem;
+    border-radius: 0.125rem;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+    color: #1b1b18;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    border-color: rgba(25, 20, 0, 0.21);
+}
+
+.nav-link.auth {
+    border-color: rgba(25, 20, 0, 0.21);
+}
+
+.content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: opacity 750ms ease;
+}
+
+.main {
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: 335px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+    .main {
+        flex-direction: row;
+        max-width: 64rem;
+    }
+}
+
+.info-panel {
+    flex: 1;
+    background-color: #fff;
+    padding: 1.5rem;
+    font-size: 13px;
+    line-height: 20px;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 0, 0.16);
+}
+
+@media (min-width: 1024px) {
+    .info-panel {
+        border-radius: 0.5rem 0 0 0.5rem;
+        padding: 5rem;
+    }
+}
+
+.intro {
+    margin-bottom: 0.5rem;
+    color: #706f6c;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.step::before {
+    content: "";
+    position: absolute;
+    left: 0.4rem;
+    top: 0;
+    bottom: 50%;
+    border-left: 1px solid #e3e3e0;
+}
+
+.step-icon {
+    background-color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid #e3e3e0;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.inner-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    background-color: #dbdbd7;
+    border-radius: 9999px;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #f53003;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 500;
+}
+
+.cta {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.375rem 1.25rem;
+    border-radius: 0.125rem;
+    border: 1px solid #000;
+    background-color: #1b1b18;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.image-panel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 335 / 376;
+    background-color: #fff2f2;
+    overflow: hidden;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+@media (min-width: 1024px) {
+    .image-panel {
+        width: 438px;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 0, 0.16);
+}
+
+.hero-svg {
+    width: 100%;
+    max-width: none;
+    color: #F53003;
+    transition: all 750ms ease;
+}
+
+.spacer {
+    height: 3.625rem;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .spacer {
+        display: block;
+    }
+}
+</style>

@@ -55,52 +55,52 @@ const updatePassword = () => {
         <Head title="Password settings" />
 
         <SettingsLayout>
-            <div class="space-y-6">
+            <div class="password-settings">
                 <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
 
-                <form @submit.prevent="updatePassword" class="space-y-6">
-                    <div class="grid gap-2">
+                <form @submit.prevent="updatePassword" class="form">
+                    <div class="form-field">
                         <Label for="current_password">Current password</Label>
                         <Input
                             id="current_password"
                             ref="currentPasswordInput"
                             v-model="form.current_password"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="current-password"
                             placeholder="Current password"
+                            class="input"
                         />
                         <InputError :message="form.errors.current_password" />
                     </div>
 
-                    <div class="grid gap-2">
+                    <div class="form-field">
                         <Label for="password">New password</Label>
                         <Input
                             id="password"
                             ref="passwordInput"
                             v-model="form.password"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="New password"
+                            class="input"
                         />
                         <InputError :message="form.errors.password" />
                     </div>
 
-                    <div class="grid gap-2">
+                    <div class="form-field">
                         <Label for="password_confirmation">Confirm password</Label>
                         <Input
                             id="password_confirmation"
                             v-model="form.password_confirmation"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="Confirm password"
+                            class="input"
                         />
                         <InputError :message="form.errors.password_confirmation" />
                     </div>
 
-                    <div class="flex items-center gap-4">
+                    <div class="form-actions">
                         <Button :disabled="form.processing">Save password</Button>
 
                         <Transition
@@ -109,7 +109,7 @@ const updatePassword = () => {
                             leave-active-class="transition ease-in-out"
                             leave-to-class="opacity-0"
                         >
-                            <p v-show="form.recentlySuccessful" class="text-sm text-neutral-600">Saved.</p>
+                            <p v-show="form.recentlySuccessful" class="success-message">Saved.</p>
                         </Transition>
                     </div>
                 </form>
@@ -117,3 +117,39 @@ const updatePassword = () => {
         </SettingsLayout>
     </AppLayout>
 </template>
+
+<style scoped>
+.password-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.input {
+    margin-top: 0.25rem;
+    width: 100%;
+    display: block;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.success-message {
+    font-size: 0.875rem;
+    color: #4b5563; /* neutral-600 */
+}
+</style>
